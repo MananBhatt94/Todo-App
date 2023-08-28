@@ -1,0 +1,45 @@
+body{
+    background-color: #0f3a52;
+}
+
+header{
+    background-color: white;
+}
+h4{
+    color: white;
+}
+.t1{
+    background-color:transparent;
+}
+
+.color-white{
+    color: white;
+}
+
+.bg-white{
+    background-color:white;
+}
+
+.my-table .header{
+    padding: 8px;
+}
+
+.my-table .header{
+    border-bottom: solid 1px #fff;
+}
+
+.my-table .body .col{
+    padding: 8px;
+}
+.checkded{
+        opacity: 0.5;
+}
+.del{
+    border-radius: 50%;
+}
+.sh{
+    width: 500px;
+}
+.sh1{
+    display: flex;
+}
