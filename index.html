@@ -75,6 +75,9 @@
 // }
 var id = 0;
 let tasklist = []; 
+if(tasklist==null){
+    tasklist=[];
+}
 try{ tasklist = JSON.parse(localStorage.getItem("task")) } catch(e){}
 
 let tasks = document.getElementById("tasklist");
