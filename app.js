@@ -2,27 +2,38 @@
 //     title:document.getElementById('Title').value,
 //     description:document.getElementById('description').value
 // }
+
 var id = 0;
 let tasklist = []; 
 try{ tasklist = JSON.parse(localStorage.getItem("task")) } catch(e){}
 
 let tasks = document.getElementById("tasklist");
 
-tasklist.forEach((task) => {
-    displayTask(task.title, task.desc, task.id);
-});
-
-
-function addTask() {
-    let title = document.getElementById('Title').value;
-    let desc = document.getElementById('description').value;
-    tasklist.push({ id: ++id, title: title, desc: desc });
-    displayTask(title, desc, id);
-    localStorage.setItem("task",JSON.stringify(tasklist));
+if (localStorage.getItem("task")) {
+    try { 
+        tasklist = JSON.parse(localStorage.getItem("task")); 
+        tasklist.forEach((task) => {
+            if (tasks) {
+                displayTask(task.title, task.desc, task.id);
+            }
+        });
+    } catch(e) {
+        console.error(e);
+    }
 }
-
-
-function displayTask(title, desc, id) {
+function addTask() {
+    let titleElement = document.getElementById('Title');
+    let descElement = document.getElementById('description');
+    if (titleElement && descElement) {
+        let title = titleElement.value;
+        let desc = descElement.value;
+        tasklist.push({ id: ++id, title: title, desc: desc });
+        if (tasks) {
+            displayTask(title, desc, id);
+        }
+        localStorage.setItem("task",JSON.stringify(tasklist));
+    }
+}function displayTask(title, desc, id) {
 
 
     tasks.innerHTML += `<div class="body bg-white mt-3 row" data-taskid="${id}"> 
