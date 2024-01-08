@@ -79,17 +79,30 @@ try{ tasklist = JSON.parse(localStorage.getItem("task")) } catch(e){}
 
 let tasks = document.getElementById("tasklist");
 
-tasklist.forEach((task) => {
-    displayTask(task.title, task.desc, task.id);
-});
-
-
+if (localStorage.getItem("task")) {
+    try { 
+        tasklist = JSON.parse(localStorage.getItem("task")); 
+        tasklist.forEach((task) => {
+            if (tasks) {
+                displayTask(task.title, task.desc, task.id);
+            }
+        });
+    } catch(e) {
+        console.error(e);
+    }
+}
 function addTask() {
-    let title = document.getElementById('Title').value;
-    let desc = document.getElementById('description').value;
-    tasklist.push({ id: ++id, title: title, desc: desc });
-    displayTask(title, desc, id);
-    localStorage.setItem("task",JSON.stringify(tasklist));
+    let titleElement = document.getElementById('Title');
+    let descElement = document.getElementById('description');
+    if (titleElement && descElement) {
+        let title = titleElement.value;
+        let desc = descElement.value;
+        tasklist.push({ id: ++id, title: title, desc: desc });
+        if (tasks) {
+            displayTask(title, desc, id);
+        }
+        localStorage.setItem("task",JSON.stringify(tasklist));
+    }
 }
 
 
