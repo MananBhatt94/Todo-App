@@ -69,31 +69,22 @@
 
 <!--     <script src="/app.js"></script> -->
     <script>
-        // let title={
-//     title:document.getElementById('Title').value,
-//     description:document.getElementById('description').value
-// }
+        //code for adding and removing task
 var id = 0;
-let tasklist = []; 
-if(tasklist==null){
-    tasklist=[];
-}
-try{ tasklist = JSON.parse(localStorage.getItem("task")) } catch(e){}
+
+let tasklist = JSON.parse(localStorage.getItem("task")) || [];
 
 let tasks = document.getElementById("tasklist");
 
-if (localStorage.getItem("task")) {
-    try { 
-        tasklist = JSON.parse(localStorage.getItem("task")); 
-        tasklist.forEach((task) => {
-            if (tasks) {
-                displayTask(task.title, task.desc, task.id);
-            }
-        });
-    } catch(e) {
-        console.error(e);
-    }
+if (tasklist) {
+    tasklist.forEach((task) => {
+        if (tasks) {
+            displayTask(task.title, task.desc, task.id);
+        }
+    });
 }
+
+
 function addTask() {
     let titleElement = document.getElementById('Title');
     let descElement = document.getElementById('description');
@@ -106,6 +97,8 @@ function addTask() {
         }
         localStorage.setItem("task",JSON.stringify(tasklist));
     }
+    titleElement.value = "";
+    descElement.value = "";
 }
 
 
